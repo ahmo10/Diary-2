@@ -50,7 +50,7 @@ class BasicTestCase(unittest.TestCase):
         tester = app.test_client(self)
         data = {"id":0, "title":"football", "description":"FINAL FRANCE WON"}
         response = tester.post("/api/v1/entries",  data=data, content_type="html/text")
-        
+
 
 
 if __name__ == '__main__':

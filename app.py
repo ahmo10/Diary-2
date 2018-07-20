@@ -55,5 +55,13 @@ def get_each_entry(id):
     return jsonify({'results': entry})
 
 
+@app.route('/api/v1/entries/<int:id>', methods=['PUT'])
+def modify_entry(id):
+    entry = [entry for entry in Entries if entry['id'] == id]
+    body = request.get_json(['title'])
+    entry[0]['body'] = body['body']
+    return 'successfully modified'
+
+
 if __name__ == '__main__':
     app.run(debug=True)
