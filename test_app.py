@@ -5,6 +5,10 @@ import unittest
 
 class BasicTestCase(unittest.TestCase):
 
+
+
+
+
     def test_index(self):
         tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
@@ -30,6 +34,7 @@ class BasicTestCase(unittest.TestCase):
 
  #test for deleting an entry
     def test_del(self):
+
         tester = app.test_client(self)
         data = {"id":0, "title":"football", "description":"FINAL FRANCE WON"}
         response = tester.delete('/api/v1/entries/0', data=data, content_type='html/text')
@@ -40,6 +45,13 @@ class BasicTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get('/api/v1/entries/1', content_type='html/text')
         self.assertEqual(response.status_code, 200)
+    #
+    def test_update(self):
+        tester = app.test_client(self)
+        data = {"id":0, "title":"football", "description":"FINAL FRANCE WON"}
+        response = tester.post("/api/v1/entries",  data=data, content_type="html/text")
+        
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    unittest.main()

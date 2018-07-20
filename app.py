@@ -53,5 +53,7 @@ def get_each_entry(id):
     entry = [entry for entry in Entries if entry['id'] == id]
 
     return jsonify({'results': entry})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
