@@ -46,5 +46,12 @@ def delete_entries(id):
     entry = [entry for entry in Entries if entry['id'] == id]
     del entry
     return jsonify({'result': "Entry successfully deleted"})
+
+#get each entry
+@app.route('/api/v1/entries/<int:id>',methods=["GET"])
+def get_each_entry(id):
+    entry = [entry for entry in Entries if entry['id'] == id]
+
+    return jsonify({'results': entry})
 if __name__ == '__main__':
     app.run(debug=True)
