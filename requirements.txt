@@ -1,6 +1,6 @@
 flask
 flask_restplus
 coverage
-
-pylint 
+pylint
+nose2 
 yapf
