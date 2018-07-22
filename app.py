@@ -8,16 +8,6 @@ api = Api(app, version='1.0', title='Diary API',
 )
 
 ns = api.namespace('user', description='My diary enddpoints operations')
-
-
-
-#Dictionary to temporily store/hold diary entries
-# entries_model = api.model('user', {
-#     'id': fields.Integer(readOnly=True, description='The unique entry identifier'),
-#     'title': fields.String(required=True, description='The title Name'),
-# 	'body': fields.String(required=True, description='The body details')
-# })
-
 entries_model = ns.model(
     "content_model", {
         "Title":
@@ -46,7 +36,7 @@ class Entry(object):
 
     def create(self, data):
         entry = data
-        entry['id'] = self.counter = self.counter + 1
+        entry["id"] = self.counter = self.counter +1
         self.entries.append(entry)
         return entry
 
@@ -60,8 +50,6 @@ class Entry(object):
         self.entries.remove(entry)
 
 an_entry = Entry()
-# an_entry.create({'Title': 'My Api', "Body":"Its fun creating api"})
-
 @ns.route('/entries')
 class Entries(Resource):
     '''Shows a list entries, and lets you POST to add new entry'''
@@ -75,7 +63,8 @@ class Entries(Resource):
     @ns.expect(entries_model)
     @ns.marshal_with(entries_model, code=201)
     def post(self):
-        '''Create a new entry'''
+        # counter = 0
+        # entries_model['id'] = counter + 1
         return an_entry.create(api.payload), 201
 
 
@@ -100,56 +89,6 @@ class Todo(Resource):
     def put(self, id):
         '''Update a task given its identifier'''
         return an_entry.update(id, api.payload)
-
-
-
-
-
-
-
-
-
-
-
-# #test route
-# @app.route('/')
-# def hello():
-#     return 'Hello, World!'
-#
-# #route getting every entries
-# @app.route('/api/v1/entries', methods=['GET'])
-# def get_entries():
-#     return jsonify({'Entries': Entries})
-#
-# #route post
-# @app.route('/api/v1/entries', methods=['POST'])
-# def create_entries():
-#
-#    date =  request.get_json(["datte"])
-#    entry = date
-#    Entries.append(entry)
-#    print(Entries)
-#    return jsonify({'Entries': Entries})
-# @app.route('/api/v1/entries/<int:id>', methods=['DELETE'])
-# def delete_entries(id):
-#     entry = [entry for entry in Entries if entry['id'] == id]
-#     del entry
-#     return jsonify({'result': "Entry successfully deleted"})
-#
-# #get each entry
-# @app.route('/api/v1/entries/<int:id>',methods=["GET"])
-# def get_each_entry(id):
-#     entry = [entry for entry in Entries if entry['id'] == id]
-#
-#     return jsonify({'results': entry})
-#
-#
-# @app.route('/api/v1/entries/<int:id>', methods=['PUT'])
-# def modify_entry(id):
-#     entry = [entry for entry in Entries if entry['id'] == id]
-#     body = request.get_json(['title'])
-#     entry[0]['body'] = body['body']
-#     return 'successfully modified'
 
 
 if __name__ == '__main__':
