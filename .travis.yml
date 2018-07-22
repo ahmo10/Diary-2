@@ -1,9 +1,20 @@
-language: python
+language:
+ - python
 
 python:
-  - "3.6"
+  - 3.6
 
 install:
   - pip install -r requirements.txt
+
 script:
+  - nose2
+  - coverage run --source=app -m nose2  && coverage report
   - python test_app.py
+
+after_success:
+  - coveralls
+
+after_success:
+  coveralls
+
