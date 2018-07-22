@@ -9,7 +9,7 @@ install:
 
 script:
   - nose2
-  - coverage run --source=app -m nose2  && coverage report
+  # - coverage run --source=app -m nose2  && coverage report
 
 after_success:
   - coveralls
