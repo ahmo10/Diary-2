@@ -88,7 +88,7 @@ class Todo(Resource):
     @ns.expect(entries_model)
     def put(self, id):
         '''Update a task given its identifier'''
-        return an_entry.update(id, api.payload)
+        return an_entry.update(id, api.payload),201
 
 
 if __name__ == '__main__':
