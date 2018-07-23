@@ -1,0 +1,6 @@
+flask
+flask_restplus
+coverage
+pylint
+nose2 
+yapf
